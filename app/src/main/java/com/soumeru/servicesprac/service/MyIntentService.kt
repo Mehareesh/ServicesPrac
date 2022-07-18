@@ -25,7 +25,7 @@ class MyIntentService : IntentService("MyService") {
         try {
             isRunning = true
             while (isRunning) {
-                Log.e(MyIntentService::class.java.name, "Service is running on " + Thread.currentThread())
+                Log.e(MyIntentService::class.java.name, "Service is running on ")
                 Thread.sleep(1000)
             }
         } catch (e: InterruptedException) {
