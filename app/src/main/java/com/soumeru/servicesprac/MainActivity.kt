@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.soumeru.servicesprac.service.MyIntentService
+import com.soumeru.servicesprac.service.MyService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,15 +14,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         startButton.setOnClickListener {
-            Intent(this, MyIntentService::class.java).also {
+            /*Intent(this, MyIntentService::class.java).also {
+                startService(it)
+                textView.text = "Service Starting...!"
+            }*/
+
+            Intent(this, MyService::class.java).also {
                 startService(it)
                 textView.text = "Service Starting...!"
             }
         }
 
         stopButton.setOnClickListener {
-            MyIntentService.stopService()
-            textView.text = "Service Stopping...!"
+            /*MyIntentService.stopService()
+            textView.text = "Service Stopping...!"*/
+
+            Intent(this, MyService::class.java).also {
+                stopService(it)
+                textView.text = "Service Stopping...!"
+            }
+        }
+
+        data_btn.setOnClickListener {
+            Intent(this, MyService::class.java).also {
+                val dataString = txt_data.text.toString()
+                it.putExtra("EXTRA_STRING", dataString)
+                startService(it)
+            }
         }
     }
 }
